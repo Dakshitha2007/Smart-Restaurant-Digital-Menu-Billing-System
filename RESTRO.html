@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sunset Serenade — Pure Vegetarian Dining</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+/* ======= RESET & ROOT ======= */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  /* Sunset Theme — Pink–Purple–Blue */
+  --pink:#FF4D8D;
+  --purple:#7B2CBF;
+  --purple-soft:#C77DFF;
+  --blue:#3A86FF;
+  --red:#FF3B3B;
+
+  --sun:#FF4D8D;
+  --amber:#FF6B6B;
+
+  --dusk:#7B2CBF;
+  --dusk-soft:#C77DFF;
+  --horizon:#C77DFF;
+
+  --sky:#E0D4FF;
+  --night:#14052E;
+  --night2:#2B0A5A;
+  --sand:#F3EEFF;
+  --warm-white:#FAF7FF;
+  --blush:#E8D5FF;
+
+  --text:#14052E;
+  --muted:#6B5C7A;
+  --card:#FFFFFF;
+  --radius:18px;
+  --shadow:0 12px 48px rgba(20,5,46,0.12);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;background:var(--warm-white);color:var(--text);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{display:block;width:100%;object-fit:cover}
+button{cursor:pointer;border:none;outline:none;font-family:inherit}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--sky)}
+::-webkit-scrollbar-thumb{background:var(--sun);border-radius:3px}
+
+/* ======= PAGE SYSTEM ======= */
+.page{display:none;min-height:100vh;animation:fadeIn 0.45s ease}
+.page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ======= NAV ======= */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:999;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 5%;height:70px;
+  background:rgba(255,250,246,0.93);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(255,107,53,0.18);
+  box-shadow:0 2px 24px rgba(26,10,46,0.07);
+}
+.logo{
+  display:flex;align-items:center;gap:10px;
+  font-family:'Playfair Display',serif;
+  font-size:1.5rem;font-weight:700;color:var(--night);
+  letter-spacing:0.01em;
+}
+.logo-icon{
+  width:40px;height:40px;border-radius:50%;
+  background:linear-gradient(135deg,var(--sun),var(--dusk));
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;box-shadow:0 4px 14px rgba(255,107,53,0.4);
+}
+.logo em{font-style:italic;color:var(--sun)}
+.nav-links{display:flex;gap:6px;align-items:center}
+.nav-btn{
+  padding:9px 22px;border-radius:50px;font-size:0.875rem;font-weight:500;
+  background:transparent;color:var(--muted);letter-spacing:0.03em;
+  transition:all 0.25s;
+}
+.nav-btn:hover,.nav-btn.active{
+  background:linear-gradient(135deg,var(--purple),var(--purple-soft));
+  color:#fff;box-shadow:0 4px 18px rgba(123,44,191,0.38);
+}
+.nav-btn.cta{
+  background:linear-gradient(135deg,var(--night),var(--night2));
+  color:#fff;
+}
+.nav-btn.cta:hover{background:linear-gradient(135deg,var(--sun),var(--dusk))}
+
+/* ======= HERO ======= */
+.hero{position:relative;height:100vh;overflow:hidden;margin-top:70px}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s cubic-bezier(.4,0,.2,1)}
+.slide.active{opacity:1}
+.slide img{width:100%;height:100%;object-fit:cover}
+.slide::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(120deg,rgba(26,10,46,0.72) 0%,rgba(139,47,201,0.3) 50%,rgba(255,107,53,0.15) 100%);
+}
+/* Sunset glow overlay */
+.slide::before{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:radial-gradient(ellipse 70% 60% at 80% 90%,rgba(255,107,53,0.35),transparent 70%);
+}
+.hero-content{
+  position:absolute;z-index:3;
+  top:50%;left:7%;transform:translateY(-52%);
+  max-width:620px;
+}
+.hero-pill{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,107,53,0.18);border:1px solid rgba(255,107,53,0.4);
+  color:#FFCBA4;font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;
+  padding:7px 18px;border-radius:50px;margin-bottom:22px;
+}
+.hero-pill span{width:8px;height:8px;border-radius:50%;background:var(--horizon);display:inline-block}
+.hero-content h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.8rem,5.8vw,4.6rem);
+  font-weight:400;line-height:1.14;color:#FFF9F5;margin-bottom:18px;
+}
+.hero-content h1 em{
+  font-style:italic;
+  background:linear-gradient(90deg,var(--horizon),var(--dusk-soft));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-content p{
+  font-size:1.05rem;color:rgba(255,249,245,0.78);
+  line-height:1.75;margin-bottom:34px;max-width:460px;font-weight:300;
+}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+.btn-sun{
+  padding:14px 36px;border-radius:50px;
+  background:linear-gradient(135deg,var(--purple),var(--purple-soft));
+  color:#fff;font-size:0.95rem;font-weight:600;letter-spacing:0.04em;
+  transition:all 0.3s;box-shadow:0 8px 28px rgba(123,44,191,0.45);
+}
+.btn-sun:hover{transform:translateY(-3px);box-shadow:0 14px 38px rgba(123,44,191,0.6)}
+.btn-ghost{
+  padding:14px 36px;border-radius:50px;
+  background:rgba(255,255,255,0.1);border:1.5px solid rgba(255,255,255,0.5);
+  color:#fff;font-size:0.95rem;font-weight:400;
+  transition:all 0.3s;
+}
+.btn-ghost:hover{background:rgba(255,255,255,0.2);border-color:#fff}
+.slider-dots{
+  position:absolute;bottom:32px;left:7%;z-index:4;
+  display:flex;gap:10px;
+}
+.dot{
+  height:6px;border-radius:3px;background:rgba(255,255,255,0.35);
+  cursor:pointer;transition:all 0.35s;width:18px;
+}
+.dot.active{background:var(--sun);width:38px}
+/* Decorative sun arc */
+.sun-arc{
+  position:absolute;bottom:-80px;right:-80px;z-index:2;
+  width:380px;height:380px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,107,53,0.22) 0%,rgba(139,47,201,0.12) 50%,transparent 70%);
+  pointer-events:none;
+}
+
+/* ======= SECTIONS ======= */
+section{padding:80px 6%}
+.tag{
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:0.74rem;letter-spacing:0.13em;text-transform:uppercase;
+  color:var(--sun);font-weight:600;margin-bottom:14px;
+}
+.tag::before{content:'';width:20px;height:2px;background:var(--sun);border-radius:1px}
+.sec-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,3.4vw,2.9rem);
+  font-weight:500;line-height:1.22;color:var(--night);margin-bottom:12px;
+}
+.sec-sub{color:var(--muted);font-size:0.97rem;line-height:1.75;max-width:500px;margin-bottom:48px;font-weight:300}
+
+/* ======= FEATURED DISHES ======= */
+.featured{background:linear-gradient(160deg,var(--sky) 0%,var(--sand) 100%)}
+.dishes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(265px,1fr));gap:26px}
+.dish-card{
+  background:#fff;border-radius:var(--radius);overflow:hidden;
+  box-shadow:0 6px 30px rgba(26,10,46,0.09);
+  transition:transform 0.32s,box-shadow 0.32s;position:relative;
+}
+.dish-card:hover{transform:translateY(-8px);box-shadow:0 22px 55px rgba(255,107,53,0.18)}
+.dish-img{height:215px;overflow:hidden;position:relative}
+.dish-img img{height:100%;transition:transform 0.55s}
+.dish-card:hover .dish-img img{transform:scale(1.09)}
+.dish-ribbon{
+  position:absolute;top:14px;right:14px;z-index:2;
+  background:linear-gradient(135deg,var(--sun),var(--horizon));
+  color:#fff;font-size:0.68rem;font-weight:600;
+  padding:4px 13px;border-radius:50px;letter-spacing:0.06em;
+}
+.dish-body{padding:20px 22px 24px}
+.dish-body h3{
+  font-family:'Playfair Display',serif;font-size:1.3rem;
+  font-weight:500;color:var(--night);margin-bottom:6px;
+}
+.dish-body p{font-size:0.84rem;color:var(--muted);line-height:1.65;margin-bottom:14px}
+.dish-price{
+  font-size:1.2rem;font-weight:700;
+  background:linear-gradient(90deg,var(--sun),var(--dusk));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+
+/* ======= WHY US (sunset gradient cards) ======= */
+.why-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:22px}
+.why-card{
+  border-radius:var(--radius);padding:34px 26px;
+  background:#fff;border:1.5px solid rgba(255,107,53,0.1);
+  transition:box-shadow 0.3s,border-color 0.3s;text-align:center;
+}
+.why-card:hover{box-shadow:0 10px 36px rgba(255,107,53,0.14);border-color:rgba(255,107,53,0.3)}
+.why-icon{
+  width:58px;height:58px;border-radius:50%;margin:0 auto 18px;
+  background:linear-gradient(135deg,var(--sky),var(--blush));
+  display:flex;align-items:center;justify-content:center;font-size:1.6rem;
+}
+.why-card h4{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--night);margin-bottom:9px}
+.why-card p{font-size:0.84rem;color:var(--muted);line-height:1.65}
+
+/* ======= FOOTER ======= */
+footer{background:var(--night);color:rgba(255,255,255,0.7);padding:60px 6% 28px}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:44px;margin-bottom:48px}
+.footer-brand .logo{color:#fff;margin-bottom:16px}
+.footer-brand p{font-size:0.875rem;line-height:1.75;color:rgba(255,255,255,0.5);max-width:270px}
+.footer-col h5{font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--amber);margin-bottom:18px;font-weight:600}
+.footer-col a,.footer-col p{display:block;font-size:0.875rem;color:rgba(255,255,255,0.55);margin-bottom:10px;transition:color 0.2s;cursor:pointer}
+.footer-col a:hover{color:var(--amber)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.08);padding-top:22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:0.8rem;color:rgba(255,255,255,0.35)}
+.veg-mark{display:inline-flex;align-items:center;gap:7px}
+.veg-dot{width:11px;height:11px;border-radius:50%;background:#3CB371;border:1.5px solid rgba(255,255,255,0.5)}
+
+/* ======= MENU PAGE ======= */
+#menu{padding-top:70px}
+.menu-banner{
+  background:linear-gradient(135deg,var(--night) 0%,var(--night2) 60%,#4A1070 100%);
+  padding:70px 6% 60px;position:relative;overflow:hidden;text-align:center;
+}
+.menu-banner::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 80% at 50% 100%,rgba(255,107,53,0.28),transparent 60%);
+  pointer-events:none;
+}
+.menu-banner h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.2rem,4vw,3.5rem);color:#fff;font-weight:400;
+  margin-bottom:12px;position:relative;z-index:1;
+}
+.menu-banner h1 em{font-style:italic;color:var(--amber)}
+.menu-banner p{color:rgba(255,255,255,0.65);font-size:1rem;position:relative;z-index:1}
+.menu-body{padding:48px 6%}
+
+/* Accordion */
+.cat-block{margin-bottom:26px;border-radius:var(--radius);overflow:hidden;box-shadow:0 4px 22px rgba(26,10,46,0.08)}
+.cat-header{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:20px 28px;cursor:pointer;background:#fff;
+  border-bottom:2px solid transparent;transition:all 0.25s;user-select:none;
+}
+.cat-header:hover,.cat-block.open .cat-header{
+  background:linear-gradient(90deg,var(--sky),var(--warm-white));
+  border-color:var(--sun);
+}
+.cat-header-left{display:flex;align-items:center;gap:14px}
+.cat-icon{font-size:1.6rem}
+.cat-header h2{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:500;color:var(--night)}
+.cat-count{
+  font-size:0.74rem;color:var(--sun);background:rgba(255,107,53,0.1);
+  padding:3px 12px;border-radius:50px;margin-left:10px;font-weight:600;
+}
+.cat-toggle{
+  width:36px;height:36px;border-radius:50%;
+  background:var(--sky);color:var(--sun);
+  font-size:1.3rem;font-weight:300;display:flex;align-items:center;justify-content:center;
+  transition:all 0.3s;flex-shrink:0;border:none;cursor:pointer;
+}
+.cat-block.open .cat-toggle{
+  background:linear-gradient(135deg,var(--purple),var(--purple-soft));
+  color:#fff;transform:rotate(180deg);
+}
+.cat-content{display:none;background:var(--sand);padding:24px}
+.cat-block.open .cat-content{display:block}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:18px}
+
+/* Menu Cards */
+.menu-card{
+  background:#fff;border-radius:14px;overflow:hidden;
+  box-shadow:0 4px 18px rgba(26,10,46,0.07);
+  transition:transform 0.3s,box-shadow 0.3s;
+  display:flex;flex-direction:column;
+}
+.menu-card:hover{transform:translateY(-5px);box-shadow:0 14px 38px rgba(255,107,53,0.16)}
+.menu-card-img{height:160px;overflow:hidden;position:relative}
+.menu-card-img img{height:100%;transition:transform 0.5s}
+.menu-card:hover .menu-card-img img{transform:scale(1.09)}
+.veg-badge{
+  position:absolute;top:9px;left:9px;
+  background:#fff;border:1.5px solid #3CB371;
+  border-radius:4px;padding:2px 8px;
+  display:flex;align-items:center;gap:5px;
+  font-size:0.66rem;color:#2E7D32;font-weight:700;letter-spacing:0.05em;
+}
+.veg-badge::before{content:'';width:7px;height:7px;border-radius:50%;background:#3CB371}
+.menu-card-body{padding:14px 16px;flex:1;display:flex;flex-direction:column}
+.menu-card-body h3{
+  font-family:'Playfair Display',serif;font-size:1.08rem;
+  font-weight:500;color:var(--night);margin-bottom:4px;
+}
+.menu-card-body .desc{font-size:0.78rem;color:var(--muted);line-height:1.58;flex:1;margin-bottom:12px}
+.menu-card-footer{display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:wrap}
+.item-price{
+  font-size:1rem;font-weight:700;
+  background:linear-gradient(90deg,var(--sun),var(--dusk));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.qty-wrap{display:flex;align-items:center;gap:2px}
+.qty-btn{
+  width:26px;height:26px;border-radius:50%;background:var(--sky);
+  color:var(--sun);font-size:1.1rem;font-weight:600;
+  display:flex;align-items:center;justify-content:center;
+  transition:all 0.2s;border:none;cursor:pointer;line-height:1;
+}
+.qty-btn:hover{background:linear-gradient(135deg,var(--sun),var(--horizon));color:#fff}
+.qty-input{
+  width:32px;text-align:center;border:none;background:transparent;
+  font-size:0.9rem;font-weight:700;color:var(--night);font-family:inherit;
+}
+.add-btn{
+  padding:7px 14px;border-radius:50px;
+  background:linear-gradient(135deg,var(--purple),var(--purple-soft));
+  color:#fff;font-size:0.76rem;font-weight:600;letter-spacing:0.03em;
+  transition:all 0.25s;white-space:nowrap;
+}
+.add-btn:hover{background:linear-gradient(135deg,var(--purple-soft),var(--purple));box-shadow:0 4px 16px rgba(123,44,191,0.4)}
+.added-flash{
+  position:absolute;inset:0;background:rgba(255,107,53,0.78);
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:1.6rem;
+  opacity:0;pointer-events:none;transition:opacity 0.3s;border-radius:14px;z-index:5;
+}
+
+/* Bill Section */
+.bill-section{
+  margin-top:50px;border-radius:var(--radius);overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.bill-header{
+  background:linear-gradient(135deg,var(--night),var(--night2),#4A1070);
+  padding:32px 36px;
+}
+.bill-header-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px}
+.bill-header h2{
+  font-family:'Playfair Display',serif;font-size:1.9rem;color:#fff;margin-bottom:5px;
+}
+.bill-header p{color:rgba(255,255,255,0.55);font-size:0.875rem}
+.bill-meta{text-align:right;font-size:0.78rem;color:rgba(255,255,255,0.45);line-height:1.7}
+.bill-meta strong{color:rgba(255,255,255,0.7);font-weight:600}
+.bill-body{background:#fff;padding:28px 36px}
+/* Charges config bar */
+.bill-config{
+  display:flex;gap:10px;flex-wrap:wrap;align-items:center;
+  background:var(--sky);border-radius:12px;padding:14px 18px;margin-bottom:22px;
+  border:1px solid rgba(255,107,53,0.15);
+}
+.bill-config label{font-size:0.75rem;font-weight:600;color:var(--night);text-transform:uppercase;letter-spacing:0.04em;margin-right:2px}
+.bill-config select,.bill-config input[type=number]{
+  border:1.5px solid rgba(26,10,46,0.13);border-radius:8px;
+  padding:5px 10px;font-family:inherit;font-size:0.84rem;
+  color:var(--text);background:#fff;width:80px;
+}
+.bill-config select{width:auto}
+.config-sep{width:1px;height:28px;background:rgba(26,10,46,0.1);flex-shrink:0;margin:0 4px}
+#bill-items-list{min-height:50px}
+.bill-item{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:11px 0;border-bottom:1px solid rgba(26,10,46,0.07);
+  font-size:0.9rem;
+}
+.bill-item:last-child{border-bottom:none}
+.bill-item-name{color:var(--text);font-weight:500}
+.bill-item-qty{color:var(--muted);font-size:0.8rem;margin-left:6px}
+.bill-item-rate{color:var(--muted);font-size:0.78rem;margin-left:4px}
+.bill-item-amt{
+  font-weight:700;
+  background:linear-gradient(90deg,var(--sun),var(--dusk));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  white-space:nowrap;
+}
+.bill-empty{text-align:center;padding:28px 0;color:var(--muted);font-size:0.9rem}
+/* Breakdown lines */
+.bill-divider{height:1px;background:rgba(26,10,46,0.08);margin:14px 0}
+.bill-divider.strong{height:2px;background:var(--sun);margin:16px 0}
+.bill-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:7px 0;font-size:0.875rem;
+}
+.bill-row.subtotal{font-weight:600;color:var(--night)}
+.bill-row.charge{color:var(--muted)}
+.bill-row.charge .lbl-badge{
+  display:inline-block;font-size:0.68rem;background:rgba(255,107,53,0.1);
+  color:var(--sun);padding:2px 8px;border-radius:50px;margin-left:6px;font-weight:600;
+}
+.bill-row.discount{color:#2e7d32;font-weight:500}
+.bill-row.grand{
+  font-size:1.35rem;font-weight:700;color:var(--night);
+  padding-top:10px;padding-bottom:4px;
+}
+.bill-row.grand .grand-amt{
+  background:linear-gradient(90deg,var(--sun),var(--dusk));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.bill-row.per-head{font-size:0.8rem;color:var(--muted);padding-top:2px}
+.bill-savings{
+  background:linear-gradient(90deg,#e8f5e9,#f1f8e9);
+  border:1px solid #a5d6a7;border-radius:10px;
+  padding:10px 16px;margin-top:14px;font-size:0.82rem;
+  color:#2e7d32;display:flex;align-items:center;gap:8px;
+}
+.bill-btns{display:flex;gap:14px;margin-top:22px;flex-wrap:wrap}
+.calc-btn{
+  padding:13px 32px;border-radius:50px;
+  background:linear-gradient(135deg,var(--sun),var(--horizon));color:#fff;
+  font-size:0.9rem;font-weight:600;letter-spacing:0.03em;
+  transition:all 0.25s;box-shadow:0 6px 22px rgba(255,107,53,0.4);
+}
+.calc-btn:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(255,107,53,0.5)}
+.clear-btn{
+  padding:13px 32px;border-radius:50px;
+  background:transparent;color:var(--muted);
+  border:1.5px solid rgba(26,10,46,0.2);
+  font-size:0.9rem;font-weight:500;transition:all 0.25s;
+}
+.clear-btn:hover{background:#FFF0E8;border-color:var(--sun);color:var(--sun)}
+.print-btn{
+  padding:13px 32px;border-radius:50px;
+  background:linear-gradient(135deg,var(--dusk),var(--dusk-soft));color:#fff;
+  font-size:0.9rem;font-weight:600;letter-spacing:0.03em;
+  transition:all 0.25s;box-shadow:0 6px 22px rgba(139,47,201,0.35);
+}
+.print-btn:hover{transform:translateY(-2px)}
+
+/* ======= ABOUT PAGE ======= */
+#about{padding-top:70px}
+.about-banner{
+  background:linear-gradient(135deg,var(--night),var(--night2),#4A1070 100%);
+  padding:70px 6% 65px;position:relative;overflow:hidden;
+}
+.about-banner::after{
+  content:'';position:absolute;bottom:-60px;right:-60px;
+  width:340px;height:340px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,107,53,0.3),transparent 65%);
+  pointer-events:none;
+}
+.about-banner h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.2rem,4vw,3.3rem);color:#fff;font-weight:400;
+  margin-bottom:14px;max-width:600px;
+}
+.about-banner p{color:rgba(255,255,255,0.65);font-size:1.02rem;line-height:1.8;max-width:520px;font-weight:300}
+.about-body{padding:65px 6%}
+.about-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:65px;align-items:center;margin-bottom:70px}
+.about-text h2{font-family:'Playfair Display',serif;font-size:2rem;font-weight:500;color:var(--night);margin-bottom:18px}
+.about-text p{color:var(--muted);line-height:1.85;margin-bottom:14px;font-size:0.95rem;font-weight:300}
+.about-img-wrap{height:430px;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.about-img-wrap img{height:100%}
+.kitchen-row{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.kitchen-row>div{height:220px;border-radius:14px;overflow:hidden;box-shadow:0 6px 22px rgba(26,10,46,0.1)}
+.kitchen-row>div img{height:100%}
+.values-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:18px;margin-top:48px}
+.val-card{
+  padding:26px 22px;border-radius:var(--radius);
+  background:linear-gradient(135deg,var(--sky),#FFF0E8);
+  border-left:4px solid var(--sun);
+}
+.val-card h4{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--night);margin-bottom:8px}
+.val-card p{font-size:0.83rem;color:var(--muted);line-height:1.65}
+
+/* ======= CONTACT PAGE ======= */
+#contact{padding-top:70px}
+.contact-banner{
+  background:linear-gradient(135deg,var(--night),var(--night2),#4A1070);
+  padding:70px 6% 60px;
+}
+.contact-banner h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.2rem,4vw,3.2rem);color:#fff;font-weight:400;margin-bottom:12px;
+}
+.contact-banner p{color:rgba(255,255,255,0.65);font-size:1rem}
+.contact-body{padding:60px 6%}
+.contact-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:56px;align-items:start}
+.contact-info h2{font-family:'Playfair Display',serif;font-size:1.85rem;color:var(--night);margin-bottom:26px}
+.info-item{display:flex;gap:16px;align-items:flex-start;margin-bottom:26px}
+.info-icon{
+  width:46px;height:46px;border-radius:12px;
+  background:linear-gradient(135deg,var(--sky),var(--blush));
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;flex-shrink:0;
+  border:1.5px solid rgba(255,107,53,0.18);
+}
+.info-text h4{font-weight:600;color:var(--night);margin-bottom:4px;font-size:0.95rem}
+.info-text p{font-size:0.865rem;color:var(--muted);line-height:1.65}
+.contact-form{background:#fff;border-radius:var(--radius);padding:40px;box-shadow:var(--shadow)}
+.contact-form h2{font-family:'Playfair Display',serif;font-size:1.75rem;color:var(--night);margin-bottom:6px}
+.contact-form .sub{color:var(--muted);font-size:0.875rem;margin-bottom:26px}
+.form-group{margin-bottom:18px}
+.form-group label{display:block;font-size:0.8rem;font-weight:600;color:var(--night);margin-bottom:7px;letter-spacing:0.04em;text-transform:uppercase}
+.form-group input,.form-group textarea,.form-group select{
+  width:100%;border:1.5px solid rgba(26,10,46,0.12);
+  border-radius:10px;padding:12px 16px;
+  font-family:inherit;font-size:0.92rem;color:var(--text);
+  background:var(--warm-white);transition:border-color 0.25s,box-shadow 0.25s;resize:none;
+}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{
+  outline:none;border-color:var(--sun);
+  box-shadow:0 0 0 3px rgba(255,107,53,0.13);
+}
+.form-group textarea{min-height:130px}
+.submit-btn{
+  width:100%;padding:14px;border-radius:50px;
+  background:linear-gradient(135deg,var(--sun),var(--horizon));
+  color:#fff;font-size:0.95rem;font-weight:600;letter-spacing:0.04em;
+  transition:all 0.25s;box-shadow:0 6px 22px rgba(255,107,53,0.4);
+}
+.submit-btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(255,107,53,0.52)}
+.map-frame{border-radius:var(--radius);overflow:hidden;margin-top:50px;height:310px;box-shadow:var(--shadow);border:2px solid rgba(255,107,53,0.15)}
+.map-frame iframe{width:100%;height:100%;border:none}
+
+/* ======= TOAST ======= */
+.toast{
+  position:fixed;bottom:28px;right:28px;z-index:9999;
+  background:var(--night);color:#fff;
+  padding:13px 24px;border-radius:12px;font-size:0.88rem;
+  box-shadow:0 8px 32px rgba(26,10,46,0.28);
+  transform:translateY(90px);opacity:0;
+  transition:all 0.4s cubic-bezier(.4,0,.2,1);
+  border-left:4px solid var(--sun);
+}
+.toast.show{transform:translateY(0);opacity:1}
+
+/* ======= RESPONSIVE ======= */
+@media(max-width:900px){
+  .footer-top{grid-template-columns:1fr 1fr}
+  .about-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .kitchen-row{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+  nav{padding:0 4%}
+  .nav-links .nav-btn:not(.cta){display:none}
+  section{padding:55px 5%}
+  .footer-top{grid-template-columns:1fr}
+  .kitchen-row{grid-template-columns:1fr}
+  .bill-header,.bill-body{padding:22px 20px}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== TOAST ===== -->
+<div class="toast" id="toast"></div>
+
+<!-- ===== NAV ===== -->
+<nav>
+  <div class="logo">
+    <div class="logo-icon">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="5" fill="white"/>
+        <g stroke="white" stroke-width="2" stroke-linecap="round">
+          <line x1="12" y1="1" x2="12" y2="4"/>
+          <line x1="12" y1="20" x2="12" y2="23"/>
+          <line x1="1" y1="12" x2="4" y2="12"/>
+          <line x1="20" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/>
+          <line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/>
+          <line x1="19.78" y1="4.22" x2="17.66" y2="6.34"/>
+          <line x1="6.34" y1="17.66" x2="4.22" y2="19.78"/>
+        </g>
+      </svg>
+    </div>
+    Sunset <em>&nbsp;Serenade</em>
+  </div>
+  <div class="nav-links">
+    <button class="nav-btn active" onclick="gotoPage('home')">Home</button>
+    <button class="nav-btn" onclick="gotoPage('menu')">Menu</button>
+    <button class="nav-btn" onclick="gotoPage('about')">About</button>
+    <button class="nav-btn" onclick="gotoCart()" style="position:relative">Cart 🛒 <span id="cart-count" style="font-size:11px;color:white;background:#FF3B3B;padding:1px 6px;border-radius:50%;position:absolute;top:4px;right:4px;min-width:18px;text-align:center;display:none">0</span></button>
+    <button class="nav-btn cta" onclick="gotoPage('contact')">Contact Us</button>
+  </div>
+</nav>
+
+<!-- ================================================================
+     HOME PAGE
+================================================================ -->
+<div class="page active" id="home">
+
+  <!-- Hero Slider -->
+  <div class="hero">
+    <div id="slides">
+      <div class="slide active"><img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1400&q=80" alt="Inside Restro-1st floor"/></div>
+      <div class="slide "><img src="https://i.redd.it/r4r2logybj6g1.png" alt="Rooftop"/></div>
+      <div class="slide"><img src="https://images.openai.com/static-rsc-4/anSF0-CuoFUy22YTOr22uoVYOLuvc_G2KrHVpZJfFtXBaO1YVt6g3SKJ0vYZChvmI4P28B4EyABDZYpmt5ym7sJZWZhimKuepnbM3vk68mzP9FUm-A9pgVbfdpoEITbx2Xvr_aGGjobUrOj0PBnqMBRd0ksTo3C_5BxrMf4Q-RnVh27GM1UGaxaPirQRq-Q4?purpose=fullsize" alt="2nd floor"/></div>
+      <div class="slide"><img src="https://images.openai.com/static-rsc-4/H_jY2gnXvuZdgpFSsozI3RVz_mmsnajL7EGLynxHswlI5yWxV-OWxbzQ4Eg_Org7hRxoSl7YhKJFIwTop2wi_TAtO3WiNiTtgB529QVVwOgkEwfHOwL-ueKdFnFy-cZBOM5j8ts86n1Jq9l7pLYDiw19-56TPoijKTUCf9ORCBMBQSi5HyURP-xl5XtVNqQS?purpose=fullsize" alt="Inside Window view"/></div>
+      <div class="slide"><img src="https://lh3.googleusercontent.com/gps-cs-s/APNQkAEhPTV2YGkMHOnDK0A3pDPZnhfuVLs6EX_3WBfALOeyMFpkpzKMpeqZYYd9PglfG_TU_SSMNktKQen42dSq3FiyclLdNHDYTWmprwJ4_OAe8gxOnFf5xNkdFLSqqBj9aU3NiBk5Yw=s1360-w1360-h1020-rw" alt="Outdoor dining"/></div>
+    </div>
+    <div class="sun-arc"></div>
+    <div class="hero-content">
+      <div class="hero-pill"><span></span> 100% Pure Vegetarian</div>
+      <h1>Welcome to<br/><em>Sunset Serenade</em></h1>
+      <p>Where every meal glows like the evening sky — warm, vibrant, and unforgettable. Pure vegetarian cuisine, crafted with love.</p>
+      <div class="hero-btns">
+        <button class="btn-sun" onclick="gotoPage('menu')">View Menu</button>
+        <button class="btn-ghost" onclick="gotoPage('about')">Our Story</button>
+      </div>
+    </div>
+    <div class="slider-dots" id="slider-dots"></div>
+  </div>
+
+  <!-- Featured Dishes -->
+  <section class="featured">
+    <div class="tag">Chef's Picks</div>
+    <h2 class="sec-title">Dishes That Steal the Show</h2>
+    <p class="sec-sub">Our most-loved plates — crafted with seasonal produce, ancient spices, and a whole lot of passion.</p>
+    <div class="dishes-grid">
+      <div class="dish-card">
+        <div class="dish-img"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-DrbDVqDnoTOMI-PyUdFMxbAe75JwJfOUDQ&s" alt="Masala Chai"/><div class="dish-ribbon">Refreshing Drink</div></div>
+        <div class="dish-body"><h3>Masala Chai</h3><p>Crispy golden crepe with spiced potato filling, sambar & coconut chutney.</p></div>
+      </div>
+      <div class="dish-card">
+        <div class="dish-img"><img src="https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=600&q=80" alt="Paneer Tikka"/><div class="dish-ribbon">Bestseller</div></div>
+        <div class="dish-body"><h3>Paneer Tikka</h3><p>Smoky marinated cottage cheese with bell peppers, grilled in our tandoor.</p></div>
+      </div>
+      <div class="dish-card">
+        <div class="dish-img"><img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bmVhcG9saXRhbiUyMHBpenphfGVufDB8fDB8fHww" alt="Neapolitan Pizza"/><div class="dish-ribbon">Wood-Fired</div></div>
+        <div class="dish-body"><h3>Neapolitan Pizza</h3><p>Wood-fired pizza topped with San Marzano tomato sauce,mozzarella,, basil, and olive oil.</p></div>
+      </div>
+      <div class="dish-card">
+        <div class="dish-img"><img src="https://media.istockphoto.com/id/521788423/photo/gulab-jamun.jpg?s=612x612&w=0&k=20&c=oMoXZUYPBZq_N8h9yqB16HsmGF4G-oEcRwEg-K8zZ0o=" alt="Gulab Jamun"/><div class="dish-ribbon">Dessert</div></div>
+        <div class="dish-body"><h3>Gulab Jamun</h3><p>Soft dumplings soaked in rose-saffron syrup, served warm with kulfi.</p></div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:44px">
+      <button class="btn-sun" onclick="gotoPage('menu')">Explore Full Menu →</button>
+    </div>
+  </section>
+
+  <!-- Why Us -->
+  <section>
+    <div class="tag">Why Choose Us</div>
+    <h2 class="sec-title">The Serenade Difference</h2>
+    <p class="sec-sub">We craft every dish like a song — composed with care, delivered with heart.</p>
+    <div class="why-grid">
+      <div class="why-card"><div class="why-icon">🌿</div><h4>Pure Vegetarian</h4><p>Every dish on our menu is completely vegetarian — no compromises, only celebration.</p></div>
+      <div class="why-card"><div class="why-icon">🌅</div><h4>Rooftop Dining</h4><p>Experience dinner under an open sky as the sun sets over the Ahmedabad skyline.</p></div>
+      <div class="why-card"><div class="why-icon">🌱</div><h4>Farm Fresh</h4><p>Ingredients sourced directly from organic farms within 100 km of our kitchen.</p></div>
+      <div class="why-card"><div class="why-icon">🎵</div><h4>Live Music</h4><p>Weekends come alive with soulful live music that perfectly pairs with your meal.</p></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo" style="color:#fff;margin-bottom:14px">
+          <div class="logo-icon">      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="5" fill="white"/>
+        <g stroke="white" stroke-width="2" stroke-linecap="round">
+          <line x1="12" y1="1" x2="12" y2="4"/>
+          <line x1="12" y1="20" x2="12" y2="23"/>
+          <line x1="1" y1="12" x2="4" y2="12"/>
+          <line x1="20" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/>
+          <line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/>
+          <line x1="19.78" y1="4.22" x2="17.66" y2="6.34"/>
+          <line x1="6.34" y1="17.66" x2="4.22" y2="19.78"/>
+        </g>
+      </svg></div> Sunset <em style="color:var(--amber)">&nbsp;Serenade</em>
+        </div>
+        <p>Ahmedabad's most enchanting vegetarian dining experience — where the food is as beautiful as the sky.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Navigate</h5>
+        <a onclick="gotoPage('home')">Home</a>
+        <a onclick="gotoPage('menu')">Menu</a>
+        <a onclick="gotoPage('about')">About</a>
+        <a onclick="gotoPage('contact')">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h5>Hours</h5>
+        <p>Mon–Fri: 11am – 11pm</p>
+        <p>Sat–Sun: 10am – 11:30pm</p>
+        <p>Holidays: 10am – 10:30pm</p>
+      </div>
+      <div class="footer-col">
+        <h5>Find Us</h5>
+        <p>📍 Bodakdev, Ahmedabad</p>
+        <p>📞 +91 98765 43210</p>
+        <p>✉️ dine@sunsetserenade.in</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2024 Sunset Serenade. All rights reserved.</span>
+      <span class="veg-mark"><span class="veg-dot"></span>100% Pure Vegetarian</span>
+    </div>
+  </footer>
+</div>
+
+<!-- ================================================================
+     MENU PAGE
+================================================================ -->
+<div class="page" id="menu">
+  <div class="menu-banner">
+    <div class="tag" style="color:var(--amber)">Our Menu</div>
+    <h1>A Symphony of <em>Flavours</em></h1>
+    <p>Pure vegetarian · Farm fresh · Crafted with love · Ahmedabad</p>
+  </div>
+
+  <div class="menu-body">
+    <!-- Starters -->
+    <div class="cat-block" id="cat-starters">
+      <div class="cat-header" onclick="toggleCat('cat-starters')">
+        <div class="cat-header-left"><span class="cat-icon">🥗</span><h2>Starters<span class="cat-count">6 Items</span></h2></div>
+        <button class="cat-toggle">⌄</button>
+      </div>
+      <div class="cat-content"><div class="menu-grid" id="grid-starters"></div></div>
+    </div>
+    <!-- Main Course -->
+    <div class="cat-block" id="cat-main">
+      <div class="cat-header" onclick="toggleCat('cat-main')">
+        <div class="cat-header-left"><span class="cat-icon">🍽️</span><h2>Main Course<span class="cat-count">6 Items</span></h2></div>
+        <button class="cat-toggle">⌄</button>
+      </div>
+      <div class="cat-content"><div class="menu-grid" id="grid-main"></div></div>
+    </div>
+    <!-- Desserts -->
+    <div class="cat-block" id="cat-desserts">
+      <div class="cat-header" onclick="toggleCat('cat-desserts')">
+        <div class="cat-header-left"><span class="cat-icon">🍮</span><h2>Desserts<span class="cat-count">5 Items</span></h2></div>
+        <button class="cat-toggle">⌄</button>
+      </div>
+      <div class="cat-content"><div class="menu-grid" id="grid-desserts"></div></div>
+    </div>
+    <!-- Drinks -->
+    <div class="cat-block" id="cat-drinks">
+      <div class="cat-header" onclick="toggleCat('cat-drinks')">
+        <div class="cat-header-left"><span class="cat-icon">🥤</span><h2>Drinks<span class="cat-count">4 Items</span></h2></div>
+        <button class="cat-toggle">⌄</button>
+      </div>
+      <div class="cat-content"><div class="menu-grid" id="grid-drinks"></div></div>
+    </div>
+
+    <!-- Bill Calculator -->
+    <div class="bill-section">
+      <div class="bill-header">
+        <h2>🧾 Your Bill</h2>
+        <p>Add items from the menu above — your order appears here</p>
+      </div>
+      <div class="bill-body">
+
+        <!-- Config bar -->
+        <div class="bill-config">
+          <label>GST</label>
+          <select id="cfg-gst" onchange="renderBill()">
+            <option value="5">5% (takeaway)</option>
+            <option value="18" selected>18% (online order)</option>
+          </select>
+          <div class="config-sep"></div>
+          <label>Restro Charge</label>
+          <select id="cfg-restro" onchange="renderBill()">
+            <option value="0">None</option>
+            <option value="50">₹50 flat</option>
+            <option value="100" selected>₹100 flat</option>
+            <option value="150">₹150 flat</option>
+          </select>
+        </div>
+
+        <!-- Items list -->
+        <div id="bill-items-list">
+          <div class="bill-empty" id="bill-empty">No items added yet. Start adding from the menu!</div>
+        </div>
+
+        <!-- Breakdown (hidden when empty) -->
+        <div id="bill-breakdown" style="display:none">
+          <div class="bill-divider"></div>
+          <div class="bill-row subtotal">
+            <span>Subtotal</span>
+            <span id="b-subtotal">₹0.00</span>
+          </div>
+          <div class="bill-row charge">
+            <span>Taxable Amount</span>
+            <span id="b-taxable">₹0.00</span>
+          </div>
+          <div class="bill-row charge">
+            <span>CGST <span class="lbl-badge" id="b-cgst-pct"></span></span>
+            <span id="b-cgst">₹0.00</span>
+          </div>
+          <div class="bill-row charge">
+            <span>SGST <span class="lbl-badge" id="b-sgst-pct"></span></span>
+            <span id="b-sgst">₹0.00</span>
+          </div>
+          <div class="bill-row charge" id="b-restro-row">
+            <span>Restaurant Charge <span class="lbl-badge">per visit</span></span>
+            <span id="b-restro">₹0.00</span>
+          </div>
+          <div class="bill-divider strong"></div>
+          <div class="bill-row grand">
+            <span>Grand Total</span>
+            <span class="grand-amt" id="b-grand">₹0.00</span>
+          </div>
+        </div>
+
+        <div class="bill-btns">
+          <button class="calc-btn" onclick="calculateBill()">Generate Bill</button>
+          <button class="clear-btn" onclick="clearBill()">Clear Bill</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-bottom">
+      <span>© 2024 Sunset Serenade. All rights reserved.</span>
+      <span class="veg-mark"><span class="veg-dot"></span>100% Pure Vegetarian</span>
+    </div>
+  </footer>
+</div>
+
+<!-- ================================================================
+     ABOUT PAGE
+================================================================ -->
+<div class="page" id="about">
+  <div class="about-banner">
+    <div class="tag" style="color:var(--amber)">Our Story</div>
+    <h1>Born Under Golden Skies,<br/>Made for the Soul</h1>
+    <p>Sunset Serenade is more than a restaurant — it's a feeling. The warmth of a setting sun, the aroma of spices, and the music of clinking glasses.</p>
+  </div>
+
+  <div class="about-body">
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="tag">Who We Are</div>
+        <h2>Ahmedabad's Golden Hour Restaurant</h2>
+        <p>Founded in 2015, Sunset Serenade was born from a simple dream: create a space where vegetarian food is celebrated, not compromised. Perched on a rooftop in Bodakdev, we serve Ahmedabad's skyline alongside our dishes — both equally breathtaking.</p>
+        <p>Our kitchen draws inspiration from across India and the world — the smoky tandoors of Punjab,the aromatic biryanis of Hyderabad,the herb-laden trattorias of Tuscany. Every dish is a journey, every plate a postcard.</p>
+        <p>We believe the best meals are crafted from honest ingredients, cooked with genuine care, and shared in good company. That philosophy has made Sunset Serenade a cherished landmark since our very first evening service.</p>
+      </div>
+      <div class="about-img-wrap">
+        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=700&q=80" alt="Restaurant ambiance"/>
+      </div>
+    </div>
+
+    <div class="tag">Behind the Scenes</div>
+    <h2 class="sec-title">Our Kitchen, Our Heart</h2>
+    <div class="kitchen-row">
+      <div><img src="https://i.ytimg.com/vi/3TZIiHpeAos/maxresdefault.jpg" alt="Chefs at work"/></div>
+      <div><img src="https://png.pngtree.com/thumb_back/fw800/background/20251108/pngtree-professional-chef-cooking-indian-curry-in-a-commercial-restaurant-kitchen-with-image_20263135.webp" alt="Fresh ingredients"/></div>
+      <div><img src="https://us.images.westend61.de/0001330330pw/indian-chef-flambing-food-in-restaurant-kitchen-OCMF01037.jpg" alt="Kitchen action"/></div>
+    </div>
+
+    <div class="values-row">
+      <div class="val-card"><h4>🌱 Farm to Fork</h4><p>We partner with certified organic farms within 100 km, ensuring peak freshness on every plate.</p></div>
+      <div class="val-card"><h4>🌍 Sustainability</h4><p>Biodegradable packaging, zero food waste policy, and solar-powered kitchen operations.</p></div>
+      <div class="val-card"><h4>🎵 Live & Local</h4><p>Every weekend features live acoustic music from Ahmedabad's finest local artists.</p></div>
+      <div class="val-card"><h4>🏆 Award-Winning</h4><p>Best Vegetarian Restaurant — Times Food Awards, Gujarat 2022 & 2023.</p></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-bottom">
+      <span>© 2024 Sunset Serenade. All rights reserved.</span>
+      <span class="veg-mark"><span class="veg-dot"></span>100% Pure Vegetarian</span>
+    </div>
+  </footer>
+</div>
+
+<!-- ================================================================
+     CONTACT PAGE
+================================================================ -->
+<div class="page" id="contact">
+  <div class="contact-banner">
+    <div class="tag" style="color:var(--amber)">Get in Touch</div>
+    <h1>Let's Make an Evening to Remember</h1>
+    <p>Reservations, events, catering — we'd love to hear from you.</p>
+  </div>
+
+  <div class="contact-body">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h2>Find Us</h2>
+        <div class="info-item">
+          <div class="info-icon">📍</div>
+          <div class="info-text"><h4>Address</h4><p>Sunset Serenade, 7th Floor, Zion Prime,<br/>Bodakdev, Ahmedabad, Gujarat 380054</p></div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">📞</div>
+          <div class="info-text"><h4>Phone</h4><p>+91 98765 43210<br/>+91 79 4011 5566</p></div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">✉️</div>
+          <div class="info-text"><h4>Email</h4><p>dine@sunsetserenade.in<br/>events@sunsetserenade.in</p></div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">🕐</div>
+          <div class="info-text"><h4>Hours</h4><p>Mon–Fri: 11:00 AM – 11:00 PM<br/>Sat–Sun: 10:00 AM – 11:30 PM</p></div>
+        </div>
+      </div>
+
+      <div class="contact-form">
+        <h2>Send a Message</h2>
+        <p class="sub">We'll respond within 24 hours.</p>
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" id="cf-name" placeholder="e.g. Priya Mehta"/>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="cf-email" placeholder="you@example.com"/>
+        </div>
+        <div class="form-group">
+          <label>Subject</label>
+          <select id="cf-subject">
+            <option>Table Reservation</option>
+            <option>Private Event / Catering</option>
+            <option>Feedback</option>
+            <option>General Enquiry</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea id="cf-message" placeholder="Tell us what's on your mind..."></textarea>
+        </div>
+        <button class="submit-btn" onclick="submitForm()">Send Message 🌅</button>
+      </div>
+    </div>
+
+    <div class="map-frame">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.8898258867!2d72.5109729!3d23.027577!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e84f78b8fe9b9%3A0xa4f7e96a2da08c3!2sBodakdev%2C%20Ahmedabad%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1700000000000"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-bottom">
+      <span>© 2024 Sunset Serenade. All rights reserved.</span>
+      <span class="veg-mark"><span class="veg-dot"></span>100% Pure Vegetarian</span>
+    </div>
+  </footer>
+</div>
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+<script>
+/* ---- DATA ---- */
+const MENU = {
+  starters:[
+    {name:"Paneer Tikka",price:335,desc:"Tandoor-grilled cottage cheese with peppers & chaat masala.",img:"https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=400&q=80"},
+    {name:"Veg Spring Rolls",price:220,desc:"Crispy rolls with glass noodles, cabbage & sesame-chilli dip.",img:"https://images.unsplash.com/photo-1722537281685-93dd0a6b5755?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDJ8fHNwcmluZyUyMHJvbGwlMjB2ZWd8ZW58MHx8MHx8fDA%3D"},
+    {name:"Masala Papad",price:100,desc:"Roasted papad topped with onion-tomato chutney & raw mango.",img:"https://t4.ftcdn.net/jpg/09/34/65/85/360_F_934658531_7yhFm5BQ6NJ9lieQr9hc31RFqMe1cycQ.jpg"},
+    {name:"Cheese Balls",price:250,desc:"A gooey, melted mozzarella encased in a savory, crunchy golden shell.",img:"https://images.squarespace-cdn.com/content/v1/5cef7b136434550001a53d10/1592904787982-5YKYYYNYKUC2VY93ZSYQ/cheeseballs2.JPG"},
+    {name:"Veg Bruschetta",price:290,desc:"Sourdough toast with tomatoes, basil & aged balsamic glaze.",img:"https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?w=400&q=80"},
+    {name:"Tandori Soya Chaap",price:320,desc:"Soy-wheat skewers marinated in thick yogurt and aromatic spices, then grilled for a smoky, charred, and succulent flavor.",img:"https://static.wixstatic.com/media/2e1f18_bea4d1f0842a4f51a15c798208f84807~mv2.webp/v1/fill/w_568,h_378,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/2e1f18_bea4d1f0842a4f51a15c798208f84807~mv2.webp"},
+  ],
+  main:[
+    {name:"Veg Biryani",price:354,desc:"A fragrant, one-pot Indian rice dish made by layering fluffy basmati rice with a spiced medley of vegetables and aromatic herbs served with raita.",img:"https://media.istockphoto.com/id/1292442851/photo/traditional-hyderabadi-vegetable-veg-dum-biryani-with-mixed-veggies-served-with-mixed-raita.jpg?s=612x612&w=0&k=20&c=FPsC5CB9UqiS09045jGu_hd3dgPHH1Z9IZm6JXe2yNA="},
+    {name:"Paneer Butter Masala",price:395,desc:"Soft paneer in velvety tomato-cream gravy with whole spices.",img:"https://as1.ftcdn.net/jpg/02/28/26/18/1000_F_228261805_Gl4XWxhKrbO6ewF4nThsuwOr8OJk6SjC.jpg"},
+    {name:"Neapolitan Pizza",price:490,desc:"Wood-fired pizza topped with San Marzano tomato sauce,mozzarella,, basil, and olive oil.",img:"https://images.unsplash.com/photo-1574071318508-1cdbab80d002?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bmVhcG9saXRhbiUyMHBpenphfGVufDB8fDB8fHww"},
+    {name:"Pesto Pasta",price:420,desc:"A vibrant, high-definition aesthetic dish featuring tender penne pasta tubes coated in a silky, rich basil pesto cream sauce. .",img:"https://i.pinimg.com/1200x/6c/f1/01/6cf1012748c99a63fd81f3edeb9b1da8.jpg"},
+    {name:"Dal Makhani",price:338,desc:"Slow-cooked black lentils in rich buttery tomato gravy.",img:"https://media.istockphoto.com/id/892941038/photo/from-makhani.jpg?s=612x612&w=0&k=20&c=5PVZ3Mbn5PddzaJ7UA-qne0mGf_8yLyZI9UUM4LzWCg="},
+    {name:"Manchurian Noodles",price:357,desc:"Stir-fried noodles with crisp, deep-fried mixed vegetable balls in a savory, tangy, and spicy soy-garlic sauce. .",img:"https://cdn.uengage.io/uploads/48101/image-8421-1762684765.jpg"},
+  ],
+  desserts:[
+    {name:"Gulab Jamun",price:175,desc:"Rose-saffron syrup dumplings.",img:"https://media.istockphoto.com/id/521788423/photo/gulab-jamun.jpg?s=612x612&w=0&k=20&c=oMoXZUYPBZq_N8h9yqB16HsmGF4G-oEcRwEg-K8zZ0o="},
+    {name:"Brownie with Ice-Cream",price:310,desc:"Warm fudgy chocolate brownie topped with cold, creamy vanilla ice cream.",img:"https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=400&q=80"},
+    {name:"Mango Trifle",price:180,desc:"Luscious layers of soft sponge, creamy custard, whipped cream, and juicy mangoes, creating a light, tropical dessert bursting with sweet, refreshing flavors.",img:"https://justamumnz.com/wp-content/uploads/2024/12/Tropical-Coconut-Trifle-IMG_4178.jpg"},
+    {name:"Biscoff Cheesecake",price:200,desc:"A rich, creamy dessert featuring a crust made from crushed Lotus Biscoff cookies.",img:"https://www.tamingtwins.com/wp-content/uploads/2023/06/image-57.jpeg"},
+    {name:"Rasmalai",price:205,desc:"Cottage cheese dumplings soaked in chilled saffron-rose milk.",img:"https://t3.ftcdn.net/jpg/17/65/84/42/360_F_1765844205_hDSIuo3sjlVikd9UHgGbfATbYfOonMjQ.jpg"},
+  ],
+  drinks:[
+    {name:"Fresh Lime Soda",price:90,desc:"Sparkling lime soda with black salt — cool and refreshing.",img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQt9VIhTbbaqCNsmrbONWflgK6xIdFp4oNxXg&s"},
+    {name:"Mango Lassi",price:165,desc:"Thick yoghurt blended with Kesar mangoes & cardamom.",img:"https://i.pinimg.com/736x/13/1e/5c/131e5cd127b17e25bc33667128e1a3a7.jpg"},
+    {name:"Masala Chai",price:80,desc:"Ginger-cardamom spiced Indian milk tea, brewed fresh.",img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-DrbDVqDnoTOMI-PyUdFMxbAe75JwJfOUDQ&s"},
+    {name:"Boba Tea",price:259,desc:"A mix ofFF milk with chewy tapioca pearls.",img:"https://static.vecteezy.com/system/resources/previews/016/116/680/large_2x/boba-milk-tea-in-a-tall-glass-with-ice-photo.jpg"},
+  ]
+};
+
+let billItems = {};
+
+function gotoCart(){
+  gotoPage('menu');
+  setTimeout(()=>{
+    document.querySelector('.bill-section').scrollIntoView({behavior:'smooth'});
+  },200);
+}
+
+/* ---- NAVIGATION ---- */
+function gotoPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.nav-btn').forEach(b=>{
+    const t=b.textContent.toLowerCase();
+    b.classList.toggle('active',
+      (id==='home'&&t.includes('home'))||
+      (id==='menu'&&t.includes('menu'))||
+      (id==='about'&&t.includes('about'))
+    );
+    if(b.classList.contains('cta')) b.classList.remove('active');
+  });
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ---- SLIDER ---- */
+let cur=0;
+const slides=document.querySelectorAll('.slide');
+const dotsEl=document.getElementById('slider-dots');
+slides.forEach((_,i)=>{
+  const d=document.createElement('div');d.className='dot'+(i===0?' active':'');
+  d.onclick=()=>go(i);dotsEl.appendChild(d);
+});
+function go(n){
+  slides[cur].classList.remove('active');dotsEl.children[cur].classList.remove('active');
+  cur=(n+slides.length)%slides.length;
+  slides[cur].classList.add('active');dotsEl.children[cur].classList.add('active');
+}
+setInterval(()=>go(cur+1),4500);
+
+/* ---- BUILD MENU ---- */
+const CATS=[
+  {key:'starters',grid:'grid-starters'},
+  {key:'main',grid:'grid-main'},
+  {key:'desserts',grid:'grid-desserts'},
+  {key:'drinks',grid:'grid-drinks'},
+];
+CATS.forEach(({key,grid})=>{
+  const g=document.getElementById(grid);
+  MENU[key].forEach(item=>{
+    const slug=item.name.replace(/\s+/g,'-');
+    const card=document.createElement('div');
+    card.className='menu-card';
+    card.innerHTML=`
+      <div class="menu-card-img" style="position:relative">
+        <img src="${item.img}" alt="${item.name}" loading="lazy"/>
+        <div class="veg-badge">VEG</div>
+        <div class="added-flash" id="flash-${slug}">✓</div>
+      </div>
+      <div class="menu-card-body">
+        <h3>${item.name}</h3>
+        <p class="desc">${item.desc}</p>
+        <div class="menu-card-footer">
+          <span class="item-price">₹${item.price}</span>
+          <div id="control-${slug}">
+            <button class="add-btn" onclick="addItemUI('${item.name}',${item.price})">ADD</button>
+          </div>
+        </div>
+      </div>`;
+    g.appendChild(card);
+  });
+});
+
+function addItemUI(name,price){
+  const slug=name.replace(/\s+/g,'-');
+  const container=document.getElementById('control-'+slug);
+
+  if(!billItems[name]){
+    billItems[name]={price,qty:1};
+  }else{
+    billItems[name].qty++;
+  }
+
+  container.innerHTML=`
+    <div class="qty-wrap">
+      <button class="qty-btn" onclick="updateQty('${name}',-1)">−</button>
+      <span id="qty-show-${slug}" style="font-weight:700;min-width:20px;text-align:center">${billItems[name].qty}</span>
+      <button class="qty-btn" onclick="updateQty('${name}',1)">+</button>
+    </div>
+  `;
+
+  const f=document.getElementById('flash-'+slug);
+  f.style.opacity='1';setTimeout(()=>f.style.opacity='0',900);
+  showToast(`✓ ${name} added`);
+  renderBill();
+  updateCartCount();
+}
+
+function updateQty(name,delta){
+  if(!billItems[name]) return;
+  const savedPrice=billItems[name].price;
+  billItems[name].qty += delta;
+
+  if(billItems[name].qty <= 0){
+    delete billItems[name];
+    const slug=name.replace(/\s+/g,'-');
+    document.getElementById('control-'+slug).innerHTML=
+      `<button class="add-btn" onclick="addItemUI('${name}',${savedPrice})">ADD</button>`;
+  }else{
+    document.getElementById('qty-show-'+name.replace(/\s+/g,'-')).textContent = billItems[name].qty;
+  }
+
+  renderBill();
+  updateCartCount();
+}
+
+function updateCartCount(){
+  let total=0;
+  Object.values(billItems).forEach(i=>total+=i.qty);
+  const badge=document.getElementById('cart-count');
+  badge.textContent=total;
+  badge.style.display=total>0?'inline':'none';
+}
+
+/* ---- RENDER BILL (full breakdown) ---- */
+function fmt(n){return '₹'+n.toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2});}
+
+function renderBill(){
+  const list=document.getElementById('bill-items-list');
+  const breakdown=document.getElementById('bill-breakdown');
+  const keys=Object.keys(billItems);
+
+  if(!keys.length){
+    list.innerHTML='<div class="bill-empty">No items added yet. Start adding from the menu!</div>';
+    breakdown.style.display='none';
+    return;
+  }
+
+  // Build items
+  list.innerHTML='';
+  let subtotal=0;
+  keys.forEach(name=>{
+    const {price,qty}=billItems[name];
+    const sub=price*qty;subtotal+=sub;
+    const row=document.createElement('div');row.className='bill-item';
+    row.innerHTML=`
+      <span class="bill-item-name">${name}
+        <span class="bill-item-qty">×${qty}</span>
+        <span class="bill-item-rate">@ ₹${price}</span>
+      </span>
+      <span class="bill-item-amt">${fmt(sub)}</span>`;
+    list.appendChild(row);
+  });
+
+  // Config values
+  const gstRate   = parseFloat(document.getElementById('cfg-gst').value)||18;
+  const restro    = parseFloat(document.getElementById('cfg-restro').value)||0;
+
+  // Calculations
+  const taxable   = +subtotal.toFixed(2);
+  const halfGST   = gstRate/2;
+  const cgst      = +(taxable * halfGST/100).toFixed(2);
+  const sgst      = cgst;
+  const grand     = +(taxable + cgst + sgst + restro).toFixed(2);
+
+  // Fill breakdown
+  document.getElementById('b-subtotal').textContent    = fmt(subtotal);
+  document.getElementById('b-taxable').textContent     = fmt(taxable);
+  document.getElementById('b-cgst-pct').textContent    = halfGST+'%';
+  document.getElementById('b-cgst').textContent        = fmt(cgst);
+  document.getElementById('b-sgst-pct').textContent    = halfGST+'%';
+  document.getElementById('b-sgst').textContent        = fmt(sgst);
+  document.getElementById('b-grand').textContent       = fmt(grand);
+
+  // Restro charge row
+  const rRow=document.getElementById('b-restro-row');
+  if(restro>0){rRow.style.display='flex';document.getElementById('b-restro').textContent=fmt(restro);}
+  else{rRow.style.display='none';}
+
+  breakdown.style.display='block';
+}
+
+function calculateBill(){
+  if(!Object.keys(billItems).length){showToast('⚠️ Add items first!');return;}
+  renderBill();
+  showReceiptModal();
+}
+
+function showReceiptModal(){
+  const gstRate = parseFloat(document.getElementById('cfg-gst').value)||18;
+  const restro  = parseFloat(document.getElementById('cfg-restro').value)||0;
+  const now     = new Date();
+  const dateStr = now.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'});
+  const timeStr = now.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+
+  let subtotal=0;
+  const itemRows=Object.entries(billItems).map(([name,{price,qty}])=>{
+    const sub=price*qty; subtotal+=sub;
+    return `<tr>
+      <td style="padding:5px 0;border-bottom:1px solid #eee">${name}</td>
+      <td style="text-align:center;padding:5px 4px;border-bottom:1px solid #eee">${qty}</td>
+      <td style="text-align:right;padding:5px 4px;border-bottom:1px solid #eee">₹${price.toFixed(2)}</td>
+      <td style="text-align:right;padding:5px 0;border-bottom:1px solid #eee">₹${sub.toFixed(2)}</td>
+    </tr>`;
+  }).join('');
+
+  const taxable=+subtotal.toFixed(2);
+  const halfGST=gstRate/2;
+  const cgst=+(taxable*halfGST/100).toFixed(2);
+  const sgst=cgst;
+  const grand=+(taxable+cgst+sgst+restro).toFixed(2);
+
+  document.getElementById('receipt-content').innerHTML=`
+    <div style="text-align:center;margin-bottom:14px">
+      <div style="font-size:2rem;line-height:1"></div>
+      <div style="font-size:1.25rem;font-weight:700;letter-spacing:0.05em;margin-top:4px">Sunset Serenade</div>
+      <div style="font-size:0.72rem;color:#555;margin-top:4px">7th Fl, Zion Prime, Bodakdev, Ahmedabad</div>
+      <div style="font-size:0.72rem;color:#555">GSTIN: 24AABCS1429B1ZB | Ph: +91 98765 43210</div>
+      <div style="font-size:0.72rem;color:#555">100% Pure Vegetarian — Online Order</div>
+    </div>
+    <div style="border-top:1px dashed #bbb;margin:10px 0"></div>
+    <div style="display:flex;justify-content:space-between;font-size:0.78rem;padding:4px 0">
+      <span>Date: ${dateStr}</span><span>Time: ${timeStr}</span>
+    </div>
+    <div style="border-top:1px dashed #bbb;margin:10px 0"></div>
+    <table style="width:100%;border-collapse:collapse;font-size:0.78rem">
+      <thead>
+        <tr>
+          <th style="text-align:left;padding:4px 0;border-bottom:2px solid #ccc;font-weight:700">Item</th>
+          <th style="text-align:center;padding:4px 4px;border-bottom:2px solid #ccc;font-weight:700">Qty</th>
+          <th style="text-align:right;padding:4px 4px;border-bottom:2px solid #ccc;font-weight:700">Rate</th>
+          <th style="text-align:right;padding:4px 0;border-bottom:2px solid #ccc;font-weight:700">Amt</th>
+        </tr>
+      </thead>
+      <tbody>${itemRows}</tbody>
+    </table>
+    <div style="border-top:1px dashed #bbb;margin:12px 0"></div>
+    <div style="font-size:0.78rem">
+      <div style="display:flex;justify-content:space-between;padding:3px 0"><span>Taxable Amount</span><span>₹${taxable.toFixed(2)}</span></div>
+      <div style="display:flex;justify-content:space-between;padding:3px 0"><span>CGST (${halfGST}%)</span><span>₹${cgst.toFixed(2)}</span></div>
+      <div style="display:flex;justify-content:space-between;padding:3px 0"><span>SGST (${halfGST}%)</span><span>₹${sgst.toFixed(2)}</span></div>
+      ${restro>0?`<div style="display:flex;justify-content:space-between;padding:3px 0"><span>Restaurant Charge</span><span>₹${restro.toFixed(2)}</span></div>`:''}
+    </div>
+    <div style="border-top:2px solid #111;margin:12px 0"></div>
+    <div style="display:flex;justify-content:space-between;font-weight:700;font-size:1rem;padding:2px 0">
+      <span>GRAND TOTAL</span><span>₹${grand.toFixed(2)}</span>
+    </div>
+    <div style="border-top:1px dashed #bbb;margin:12px 0"></div>
+    <div style="text-align:center;font-size:0.7rem;color:#777;line-height:1.8">
+      Thank you for your order!<br/>★★★★★ Rate us on Google Maps<br/>dine@sunsetserenade.in
+    </div>
+  `;
+  document.getElementById('bill-modal').style.display='block';
+  document.body.style.overflow='hidden';
+}
+
+function closeBillModal(){
+  document.getElementById('bill-modal').style.display='none';
+  document.body.style.overflow='';
+}
+
+function printReceipt(){
+  const content=document.getElementById('receipt-content').innerHTML;
+  const win=window.open('','_blank');
+  win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"/><title>Bill — Sunset Serenade</title>
+  <style>
+    @page{size:80mm auto;margin:5mm}
+    body{font-family:'Courier New',monospace;width:300px;margin:auto;font-size:12px;color:#111}
+    @media print{body{margin:0}}
+  </style></head><body>${content}</body></html>`);
+  win.document.close();win.focus();win.print();
+}
+
+/* ---- PRINT BILL (removed, replaced by receipt modal) ---- */
+function printBill(){ showReceiptModal(); }
+
+function clearBill(){
+  billItems={};
+  renderBill();
+  // Reset all ADD buttons
+  document.querySelectorAll('[id^="control-"]').forEach(el=>{
+    const slug=el.id.replace('control-','');
+    const name=slug.replace(/-/g,' ');
+    // Find price from MENU data
+    let price=0;
+    Object.values(MENU).flat().forEach(item=>{if(item.name.replace(/\s+/g,'-')===slug)price=item.price;});
+    el.innerHTML=`<button class="add-btn" onclick="addItemUI('${name.replace(/'/g,"\\'")}',${price})">ADD</button>`;
+  });
+  updateCartCount();
+  showToast('🗑️ Bill cleared');
+}
+/* ---- ACCORDION ---- */
+function toggleCat(id){document.getElementById(id).classList.toggle('open')}
+
+/* ---- CONTACT ---- */
+function submitForm(){
+  const n=document.getElementById('cf-name').value.trim();
+  const e=document.getElementById('cf-email').value.trim();
+  const m=document.getElementById('cf-message').value.trim();
+  if(!n||!e||!m){showToast('⚠️ Please fill all fields.');return;}
+  showToast(`🌅 Thanks ${n}! We'll be in touch soon.`);
+  ['cf-name','cf-email','cf-message'].forEach(id=>document.getElementById(id).value='');
+}
+
+/* ---- TOAST ---- */
+let toastT;
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),3200);
+}
+</script>
+<!-- ===== BILL RECEIPT MODAL ===== -->
+<div id="bill-modal" onclick="if(event.target===this)closeBillModal()" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:99999;background:rgba(20,5,46,0.6);overflow-y:auto;padding:30px 16px">
+  <div style="font-family:'Courier New',monospace;width:100%;max-width:480px;margin:0 auto;background:#fff;border-radius:12px;padding:32px 36px;box-shadow:0 24px 80px rgba(20,5,46,0.35);position:relative">
+    <button onclick="closeBillModal()" style="position:absolute;top:12px;right:16px;background:none;border:none;font-size:1.5rem;cursor:pointer;color:#999;line-height:1;font-family:sans-serif">✕</button>
+    <div id="receipt-content"></div>
+    <div style="margin-top:22px;text-align:center">
+      <button onclick="printReceipt()" style="padding:11px 30px;border-radius:50px;background:linear-gradient(135deg,#7B2CBF,#C77DFF);color:#fff;font-size:0.88rem;font-weight:600;border:none;cursor:pointer;letter-spacing:0.04em;font-family:sans-serif">🖨️ Print / Save PDF</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
